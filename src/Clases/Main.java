@@ -12,20 +12,20 @@ public class Main
         aplicacion.setSize( 350, 350 );
         aplicacion.setVisible(true);
         
+        //Serpiente snake = new Serpiente(150,150,"derecha");
+        //Serpiente snake = new Serpiente(150,150,"izquierda");
+        //Serpiente snake = new Serpiente(150,150,"arriba");
+        Serpiente snake = new Serpiente(150,150,"abajo");
+ 
         Dibujar panel = new Dibujar();
-        
-        Serpiente snake = new Serpiente();
-        snake.getCola().add(new Segmento());
-        snake.getCola().get(0).setCoordenada_x(60);
-        snake.getCola().get(0).setCoordenada_y(60);
-        snake.imprimir();
-        
-        panel.setSnake(snake);
         while(true)
         {
+            snake.avanzar();
+            //snake.agregar();
+            panel.setSnake(snake);
             aplicacion.add(panel);
             aplicacion.repaint();
-            Thread.sleep(500);
+            Thread.sleep(1000);
         }
     }
 }

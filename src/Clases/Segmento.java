@@ -33,5 +33,5 @@ public class Segmento
     public void imprimir() {
         System.out.print(" X: "+this.coordenada_x+" Y: "+this.coordenada_y+" ");
     }
-    
+     
 }
