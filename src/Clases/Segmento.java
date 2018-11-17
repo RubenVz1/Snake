@@ -2,8 +2,8 @@ package Clases;
 
 public class Segmento
 {
-    private float coordenada_x;
-    private float coordenada_y;
+    private int coordenada_x;
+    private int coordenada_y;
     private String direccion;
 
     public String getDireccion() {
@@ -14,19 +14,19 @@ public class Segmento
         this.direccion = direccion;
     }
     
-    public float getCoordenada_x() {
+    public int getCoordenada_x() {
         return coordenada_x;
     }
 
-    public void setCoordenada_x(float coordenada_x) {
+    public void setCoordenada_x(int coordenada_x) {
         this.coordenada_x = coordenada_x;
     }
 
-    public float getCoordenada_y() {
+    public int getCoordenada_y() {
         return coordenada_y;
     }
 
-    public void setCoordenada_y(float coordenada_y) {
+    public void setCoordenada_y(int coordenada_y) {
         this.coordenada_y = coordenada_y;
     }
     

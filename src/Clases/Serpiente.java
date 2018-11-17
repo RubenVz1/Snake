@@ -12,8 +12,8 @@ public class Serpiente
     public Serpiente() {
         cola = new ArrayList<Segmento>();
         cabeza = new Segmento();
-        cabeza.setCoordenada_x(50f);
-        cabeza.setCoordenada_y(50f);
+        cabeza.setCoordenada_x(50);
+        cabeza.setCoordenada_y(50);
         cabeza.setDireccion("derecha");
     }
     
