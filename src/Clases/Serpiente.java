@@ -1,8 +1,6 @@
-
 package Clases;
 
 import java.util.ArrayList;
-
 
 public class Serpiente
 {
@@ -90,6 +88,11 @@ public class Serpiente
             break;
         }
         cola.remove(cola.size()-1);
+    }
+    
+    public void direccion(String direccion)
+    {
+        cola.get(0).setDireccion(direccion);
     }
     
     public ArrayList<Segmento> getCola() {

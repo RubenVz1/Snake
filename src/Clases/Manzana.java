@@ -1,17 +1,14 @@
 package Clases;
 
-public class Segmento
+public class Manzana
 {
     private int coordenada_x;
     private int coordenada_y;
-    private String direccion;
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public Manzana()
+    {
+        coordenada_x = (int)(Math.random()*500)+20;
+        coordenada_y = (int)(Math.random()*500)+20;
     }
     
     public int getCoordenada_x() {
@@ -30,7 +27,5 @@ public class Segmento
         this.coordenada_y = coordenada_y;
     }
     
-    public void imprimir() {
-        System.out.print(" X: "+this.coordenada_x+" Y: "+this.coordenada_y+" ");
-    }
+    
 }

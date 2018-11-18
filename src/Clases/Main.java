@@ -1,6 +1,6 @@
-
 package Clases;
 
+import java.util.Scanner;
 import javax.swing.JFrame;
 
 public class Main
@@ -9,23 +9,20 @@ public class Main
     {
         JFrame aplicacion = new JFrame();
         aplicacion.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        aplicacion.setSize( 350, 350 );
+        aplicacion.setSize( 800, 600 );
+        Escenario panel = new Escenario();
+        aplicacion.add(panel);
         aplicacion.setVisible(true);
-        
-        //Serpiente snake = new Serpiente(150,150,"derecha");
-        //Serpiente snake = new Serpiente(150,150,"izquierda");
-        //Serpiente snake = new Serpiente(150,150,"arriba");
-        Serpiente snake = new Serpiente(150,150,"abajo");
- 
-        Dibujar panel = new Dibujar();
         while(true)
         {
-            snake.avanzar();
-            //snake.agregar();
-            panel.setSnake(snake);
+            int x = (int)(Math.random()*540)+20;
+            if(x<=20 || x>=560)
+            {
+                System.out.println("x: "+x);
+            }
             aplicacion.add(panel);
             aplicacion.repaint();
-            Thread.sleep(1000);
+            Thread.sleep(100);
         }
     }
 }
