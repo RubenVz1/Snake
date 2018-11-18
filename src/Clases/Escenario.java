@@ -2,32 +2,61 @@ package Clases;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Escenario extends javax.swing.JPanel
+public class Escenario extends javax.swing.JPanel implements KeyListener
 {
-
-    public Escenario()
-    {
-        initComponents();
-        snake = new Serpiente(150,150,"derecha");
-        manzana = new Manzana();
-        puntuacion = 1;
-        jLabel_Puntuacion.setText(""+(puntuacion-1));
-        jLabel_Velocidad.setText(""+2000);
-        jLabel_Perder.setVisible(false);
-    }
 
     private Serpiente snake;
     private Manzana manzana;
     private int puntuacion;
     private int velocidad;
-
+    
+    public Escenario()
+    {
+        initComponents();
+        snake = new Serpiente(150,150,"derecha");
+        manzana = new Manzana();
+        jLabel_Perder.setVisible(false);
+        setPuntuacion(1);
+        setVelocidad(500);
+        addKeyListener(this);
+        setFocusable(true);
+    }
+        
     public Serpiente getSnake() {
         return snake;
     }
 
     public void setSnake(Serpiente snake) {
         this.snake = snake;
+    }
+    
+    public Manzana getManzana() {
+        return manzana;
+    }
+
+    public void setManzana(Manzana manzana) {
+        this.manzana = manzana;
+    }
+
+    public int getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
+        jLabel_Puntuacion.setText(""+(puntuacion-1));
+    }
+
+    public int getVelocidad() {
+        return velocidad;
+    }
+
+    public void setVelocidad(int velocidad) {
+        this.velocidad = velocidad;
+        jLabel_Velocidad.setText(""+(500-velocidad));
     }
     
     public void dibujarContorno(Graphics g)
@@ -66,21 +95,9 @@ public class Escenario extends javax.swing.JPanel
         g.drawOval(coordenada_x,coordenada_y,20,20);
     }
     
-    public boolean colision_pared()
+    public void colision()
     {
-        int coordenada_x = snake.getCola().get(0).getCoordenada_x();
-        int coordenada_y = snake.getCola().get(0).getCoordenada_y();
-        if(coordenada_x >= 531 || coordenada_x <= 9)
-        {
-            jLabel_Perder.setVisible(true);
-            return true;
-        }
-        if(coordenada_y >= 531 || coordenada_y <= 9)
-        {
-            jLabel_Perder.setVisible(true);
-            return true;   
-        }
-        return false;
+        jLabel_Perder.setVisible(true);
     }
     
     public void colision_manzana()
@@ -91,22 +108,21 @@ public class Escenario extends javax.swing.JPanel
         int coordenada_y_2 = manzana.getCoordenada_y();
         if(coordenada_x_1 == coordenada_x_2 && coordenada_y_1 == coordenada_y_2)
         {
-            puntuacion++;
-            jLabel_Puntuacion.setText(""+(puntuacion-1));
-            jLabel_Velocidad.setText(""+(2000-velocidad));
+            setPuntuacion(puntuacion+1);
+            if(velocidad>=100 && (puntuacion%4)==0)
+                setVelocidad(velocidad-50);
             manzana = new Manzana();
-            snake.agregar();
-        }
-            
+            snake.agregar(); 
+        }   
     }
     
     public void paintComponent( Graphics g )
     {        
         dibujarContorno(g);
         dibujarManzana(g);
-        if(!colision_pared())
+        if(!snake.avanzar())
         {
-            snake.avanzar();
+            colision();
         }
         dibujarSerpiente(g);
         colision_manzana();
@@ -239,7 +255,7 @@ public class Escenario extends javax.swing.JPanel
 
         jLabel_Perder.setFont(new java.awt.Font("Britannic Bold", 0, 60)); // NOI18N
         jLabel_Perder.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel_Perder.setText("HAZ PERDIDO");
+        jLabel_Perder.setText("HAS PERDIDO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -280,37 +296,11 @@ public class Escenario extends javax.swing.JPanel
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         snake = new Serpiente(150,150,"derecha");
         manzana = new Manzana();
-        this.puntuacion = 0;
-        jLabel_Puntuacion.setText(""+puntuacion);
+        setPuntuacion(1);
+        setVelocidad(500);
         jLabel_Perder.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public Manzana getManzana() {
-        return manzana;
-    }
-
-    public void setManzana(Manzana manzana) {
-        this.manzana = manzana;
-    }
-
-    public int getPuntuacion() {
-        return puntuacion;
-    }
-
-    public void setPuntuacion(int puntuacion) {
-        this.puntuacion = puntuacion;
-    }
-
-    public int getVelocidad() {
-        return velocidad;
-    }
-
-    public void setVelocidad(int velocidad) {
-        this.velocidad = velocidad;
-    }
-    
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_Abajo;
@@ -325,5 +315,24 @@ public class Escenario extends javax.swing.JPanel
     private javax.swing.JLabel jLabel_Velocidad;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void keyTyped(KeyEvent e) {}
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if("W".equals(KeyEvent.getKeyText(e.getKeyCode())))
+            snake.direccion("arriba");
+        if("S".equals(KeyEvent.getKeyText(e.getKeyCode())))
+            snake.direccion("abajo");
+        if("A".equals(KeyEvent.getKeyText(e.getKeyCode())))
+            snake.direccion("izquierda");
+        if("D".equals(KeyEvent.getKeyText(e.getKeyCode())))
+            snake.direccion("derecha");
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
 
 }
