@@ -7,8 +7,8 @@ public class Manzana
 
     public Manzana()
     {
-        coordenada_x = (int)(Math.random()*500)+20;
-        coordenada_y = (int)(Math.random()*500)+20;
+        coordenada_x = (int)((Math.random()*27))*20+10;
+        coordenada_y = (int)((Math.random()*27))*20+10;
     }
     
     public int getCoordenada_x() {

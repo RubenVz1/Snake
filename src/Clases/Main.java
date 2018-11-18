@@ -9,20 +9,25 @@ public class Main
     {
         JFrame aplicacion = new JFrame();
         aplicacion.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        aplicacion.setSize( 800, 600 );
+        aplicacion.setSize(798,600);
         Escenario panel = new Escenario();
         aplicacion.add(panel);
         aplicacion.setVisible(true);
+        int velocidad = 0;
+        int puntuacion = 1;
         while(true)
         {
-            int x = (int)(Math.random()*540)+20;
-            if(x<=20 || x>=560)
-            {
-                System.out.println("x: "+x);
-            }
             aplicacion.add(panel);
+            if(velocidad>=100 && (puntuacion%4)==0)
+            {
+                System.out.println("cambio velocidad: " +velocidad);
+                panel.setVelocidad(velocidad);
+                velocidad-=100;
+            }
+            puntuacion = panel.getPuntuacion();
+            panel.setVelocidad(velocidad);
             aplicacion.repaint();
-            Thread.sleep(100);
+            Thread.sleep(velocidad+300);
         }
     }
 }
