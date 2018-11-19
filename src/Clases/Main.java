@@ -9,7 +9,9 @@ public class Main
     {
         JFrame aplicacion = new JFrame("Snake");
         aplicacion.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        aplicacion.setSize(798,600);
+        aplicacion.setSize(800,590);
+        aplicacion.setResizable(false);
+        aplicacion.setLocationRelativeTo(null);
         
         Escenario panel = new Escenario();
         aplicacion.add(panel);
