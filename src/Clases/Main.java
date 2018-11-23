@@ -16,10 +16,9 @@ public class Main
         Escenario panel = new Escenario();
         aplicacion.add(panel);
         aplicacion.setVisible(true);
-        
+
         while(true)
         {
-            aplicacion.add(panel);
             aplicacion.repaint();
             Thread.sleep(panel.getVelocidad());
         }
